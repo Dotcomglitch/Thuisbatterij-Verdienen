@@ -250,9 +250,9 @@
                         <p class="mb-4">Knipperende lampen, volle stopcontacten en een enorme piek in verbruik zodra iedereen thuiskomt. Het stroomnet komt steeds vaker onder extra druk te staan.</p>
                         
                         <p class="mb-4">De vraag is simpel: wat doet u als het net het niet meer aankan? Stel het u voor. Het is spitsuur. Heel Nederland verbruikt tegelijk stroom. En dan… valt alles uit. Geen wifi. Geen licht. Geen controle. U zit in het donker terwijl u nergens invloed op heeft. <strong>Juist op die momenten wilt u geen gedoe; u wilt zekerheid.</strong></p>
- 
+
                         <p class="mb-4 font-weight-bold">U kunt blijven hopen dat het goed gaat. Of u kunt het zelf regelen.</p>
- 
+
                         <p class="mb-4">Met een thuisbatterij kiest u voor zekerheid in plaats van afhankelijkheid. Tijdens piekbelasting of een storing blijven uw belangrijkste voorzieningen gewoon werken:</p>
                         
                         <ul class="check-list mb-4 font-weight-bold">
@@ -260,7 +260,7 @@
                             <li>Wifi blijft actief</li>
                             <li>Essentiële apparaten blijven draaien</li>
                         </ul>
- 
+
                         <p class="mb-4">Waarom zou u volledig afhankelijk blijven van een overbelast net, als u zelf de regie kunt nemen?</p>
                         
                         <p class="mb-4 font-italic">Daarom kiezen steeds meer huishoudens voor eigen opslag in huis met een thuisbatterij. In combinatie met een noodstroomvoorziening kan uw woning bij een storing essentiële apparaten tijdelijk blijven ondersteunen.</p>
@@ -381,12 +381,12 @@
                 </div>
                 <div class="progress mb-4" style="height: 8px;"><div class="progress-bar bg-fvd-gold" style="width: 16%;"></div></div>
                 <div class="text-center mb-4">
-                    <div class="image-placeholder rounded mb-3">[Afbeelding: Zonnepanelen]</div>
+                    <div class="image-placeholder rounded mb-3"></div>
                     <h3 class="h4 font-weight-bold">Heeft u al zonnepanelen?</h3>
                 </div>
-                <button class="btn btn-outline-custom" onclick="recordAnswer(1, 'Ja, digitale meter'); goToQuestion(2, 32)">Ja, digitale meter <span>➔</span></button>
-                <button class="btn btn-outline-custom" onclick="recordAnswer(1, 'Ja, terugdraaiende teller'); goToQuestion(2, 32)">Ja, terugdraaiende teller <span>➔</span></button>
-                <button class="btn btn-outline-custom" onclick="recordAnswer(1, 'Nee, nog niet'); goToQuestion(2, 32)">Nee, nog niet <span>➔</span></button>
+                <button class="btn btn-outline-custom" onclick="setAnswer('panels', 'Digitale meter'); goToQuestion(2, 32)">Ja, digitale meter <span>➔</span></button>
+                <button class="btn btn-outline-custom" onclick="setAnswer('panels', 'Terugdraaiende teller'); goToQuestion(2, 32)">Ja, terugdraaiende teller <span>➔</span></button>
+                <button class="btn btn-outline-custom" onclick="setAnswer('panels', 'Geen'); goToQuestion(2, 32)">Nee, nog niet <span>➔</span></button>
             </div>
 
             <!-- Vraag 2 -->
@@ -397,12 +397,12 @@
                 </div>
                 <div class="progress mb-4" style="height: 8px;"><div class="progress-bar bg-fvd-gold" style="width: 32%;"></div></div>
                 <div class="text-center mb-4">
-                    <div class="image-placeholder rounded mb-3">[Afbeelding: Type pand]</div>
+                    <div class="image-placeholder rounded mb-3"></div>
                     <h3 class="h4 font-weight-bold">Waar wilt u de batterij plaatsen?</h3>
                 </div>
                 <div class="row">
-                    <div class="col-6"><button class="btn btn-outline-custom flex-column py-4" onclick="recordAnswer(2, 'Woning'); goToQuestion(3, 48)">🏠 Woning</button></div>
-                    <div class="col-6"><button class="btn btn-outline-custom flex-column py-4" onclick="recordAnswer(2, 'Bedrijf'); goToQuestion(3, 48)">🏢 Bedrijf</button></div>
+                    <div class="col-6"><button class="btn btn-outline-custom flex-column py-4" onclick="setAnswer('building_type', 'Woning'); goToQuestion(3, 48)">🏠 Woning</button></div>
+                    <div class="col-6"><button class="btn btn-outline-custom flex-column py-4" onclick="setAnswer('building_type', 'Bedrijfspand'); goToQuestion(3, 48)">🏢 Bedrijf</button></div>
                 </div>
             </div>
 
@@ -434,8 +434,8 @@
                 </div>
                 <div class="progress mb-4" style="height: 8px;"><div class="progress-bar bg-fvd-gold" style="width: 64%;"></div></div>
                 <div class="text-center mb-4"><h3 class="h4 font-weight-bold">Is er ruimte voor een batterij?</h3></div>
-                <button class="btn btn-outline-custom" onclick="recordAnswer(4, 'Ja, voldoende ruimte'); goToQuestion(5, 80)">Ja, voldoende ruimte <span>➔</span></button>
-                <button class="btn btn-outline-custom" onclick="recordAnswer(4, 'Nee, ik twijfel'); goToQuestion(5, 80)">Nee, ik twijfel <span>➔</span></button>
+                <button class="btn btn-outline-custom" onclick="setAnswer('space', 'Ja'); goToQuestion(5, 80)">Ja, voldoende ruimte <span>➔</span></button>
+                <button class="btn btn-outline-custom" onclick="setAnswer('space', 'Nee/Twijfel'); goToQuestion(5, 80)">Nee, ik twijfel <span>➔</span></button>
             </div>
 
             <!-- Vraag 5 -->
@@ -453,8 +453,8 @@
                     <p class="font-weight-bold mb-3">Wat voor type woning heeft u?</p>
                 </div>
                 <div class="row">
-                    <div class="col-6"><button class="btn btn-outline-custom flex-column py-3 text-center" onclick="recordAnswer(5, 'Huurwoning'); goToQuestion('final', 100)">Huurwoning</button></div>
-                    <div class="col-6"><button class="btn btn-outline-custom flex-column py-3 text-center" onclick="recordAnswer(5, 'Koopwoning'); goToQuestion('final', 100)">Koopwoning</button></div>
+                    <div class="col-6"><button class="btn btn-outline-custom flex-column py-3 text-center" onclick="setAnswer('tenure', 'Huur'); goToQuestion('final', 100)">Huurwoning</button></div>
+                    <div class="col-6"><button class="btn btn-outline-custom flex-column py-3 text-center" onclick="setAnswer('tenure', 'Koop'); goToQuestion('final', 100)">Koopwoning</button></div>
                 </div>
             </div>
 
@@ -467,21 +467,58 @@
                 </div>
                 
                 <form id="finalLeadForm" class="row no-gutters">
-                    <div class="col-12 mb-3"><label class="form-label-custom">Aanhef *</label>
-                        <select id="form-title" class="form-control form-control-custom" required><option value="" disabled selected>Kies...</option><option>Dhr.</option><option>Mevr.</option></select>
+                    <div class="col-12 mb-3">
+                        <label class="form-label-custom">Aanhef *</label>
+                        <select id="form-title" class="form-control form-control-custom" required>
+                            <option value="" disabled selected>Kies...</option>
+                            <option>Dhr.</option>
+                            <option>Mevr.</option>
+                        </select>
                     </div>
-                    <div class="col-md-6 pr-md-2 mb-3"><label class="form-label-custom">Voornaam *</label><input type="text" id="form-firstname" class="form-control form-control-custom" required></div>
-                    <div class="col-md-6 mb-3"><label class="form-label-custom">Achternaam *</label><input type="text" id="form-lastname" class="form-control form-control-custom" required></div>
-                    <div class="col-md-8 pr-md-2 mb-3"><label class="form-label-custom">Straatnaam *</label><input type="text" id="form-street" class="form-control form-control-custom" required></div>
-                    <div class="col-md-2 pr-md-2 mb-3"><label class="form-label-custom">Nr *</label><input type="text" id="form-housenumber" class="form-control form-control-custom" required></div>
-                    <div class="col-md-2 mb-3"><label class="form-label-custom">Toev.</label><input type="text" id="form-addition" class="form-control form-control-custom"></div>
-                    <div class="col-md-5 pr-md-2 mb-3"><label class="form-label-custom">Postcode *</label><input type="text" id="form-postcode" class="form-control form-control-custom" required></div>
-                    <div class="col-md-7 mb-3"><label class="form-label-custom">Woonplaats *</label><input type="text" id="form-city" class="form-control form-control-custom" required></div>
-                    <div class="col-12 mb-3"><label class="form-label-custom">Telefoonnummer *</label>
-                        <div class="input-group"><div class="input-group-prepend"><span class="input-group-text small">+31</span></div><input type="tel" id="form-phone" class="form-control form-control-custom" required></div>
+                    <div class="col-md-6 pr-md-2 mb-3">
+                        <label class="form-label-custom">Voornaam *</label>
+                        <input type="text" id="form-firstname" class="form-control form-control-custom" required>
                     </div>
-                    <div class="col-12 mb-4"><label class="form-label-custom">E-mail *</label><input type="email" id="form-email" class="form-control form-control-custom" required></div>
-                    <div class="col-12"><button type="submit" class="btn btn-fvd-red btn-block btn-xl shadow-lg">Pak mijn winst ➔</button></div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label-custom">Achternaam *</label>
+                        <input type="text" id="form-lastname" class="form-control form-control-custom" required>
+                    </div>
+                    <div class="col-md-8 pr-md-2 mb-3">
+                        <label class="form-label-custom">Straatnaam *</label>
+                        <input type="text" id="form-street" class="form-control form-control-custom" required>
+                    </div>
+                    <div class="col-md-2 pr-md-2 mb-3">
+                        <label class="form-label-custom">Nr *</label>
+                        <input type="text" id="form-housenumber" class="form-control form-control-custom" required>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label class="form-label-custom">Toev.</label>
+                        <input type="text" class="form-control form-control-custom">
+                    </div>
+                    <div class="col-md-5 pr-md-2 mb-3">
+                        <label class="form-label-custom">Postcode *</label>
+                        <input type="text" id="form-postcode" class="form-control form-control-custom" required>
+                    </div>
+                    <div class="col-md-7 mb-3">
+                        <label class="form-label-custom">Woonplaats *</label>
+                        <input type="text" id="form-city" class="form-control form-control-custom" required>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label class="form-label-custom">Telefoonnummer *</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text small">+31</span>
+                            </div>
+                            <input type="tel" id="form-phone" class="form-control form-control-custom" required>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-4">
+                        <label class="form-label-custom">E-mail *</label>
+                        <input type="email" id="form-email" class="form-control form-control-custom" required>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-fvd-red btn-block btn-xl shadow-lg">Pak mijn winst ➔</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -510,69 +547,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
 
     <script>
-        // ===== QUESTION TRACKING SYSTEM =====
-        const funnelAnswers = {
-            postcode: '',
-            huisnummer: '',
-            gemeente: '',
-            question_1: '',  // Zonnepanelen
-            question_2: '',  // Type pand
-            question_3: '',  // Verbruik
-            question_4: '',  // Ruimte batterij
-            question_5: ''   // Type woning
-        };
-
-        function recordAnswer(questionNumber, answer) {
-            funnelAnswers['question_' + questionNumber] = answer;
-            console.log('Answer recorded:', funnelAnswers);
-            // Optionally save to localStorage for persistence
-            localStorage.setItem('funnelAnswers', JSON.stringify(funnelAnswers));
-        }
-
-        function getFormData() {
-            return {
-                title: $('#form-title').val(),
-                firstname: $('#form-firstname').val(),
-                lastname: $('#form-lastname').val(),
-                street: $('#form-street').val(),
-                housenumber: $('#form-housenumber').val(),
-                addition: $('#form-addition').val(),
-                postcode: $('#form-postcode').val(),
-                city: $('#form-city').val(),
-                phone: $('#form-phone').val(),
-                email: $('#form-email').val(),
-                funnel_answers: funnelAnswers
-            };
-        }
-
-        // ===== DATABOWL CONFIGURATION =====
-        const DATABOWL_CONFIG = {
-            instanceName: 'your-instance-name',  // Replace with your instance
-            campaignId: 'your-campaign-id',      // From Integration Document
-            supplierId: 'your-supplier-id'       // From Integration Document
-        };
-
-        // ===== ORIGINAL GEMEENTE LOOKUP =====
         const gemeenteLookup = { '10': 'Amsterdam', '30': 'Rotterdam', '35': 'Utrecht', '56': 'Eindhoven', '97': 'Groningen', '20': 'Haarlem' };
-        
-        function getGemeente(postcode) { 
-            const prefix = postcode.substring(0, 2); 
-            return gemeenteLookup[prefix] || "uw regio"; 
+        function getGemeente(postcode) { const prefix = postcode.substring(0, 2); return gemeenteLookup[prefix] || "uw regio"; }
+
+        let funnelAnswers = {};
+
+        function setAnswer(key, value) {
+            funnelAnswers[key] = value;
         }
 
         function startFunnel() {
-            const pc = $('#postcode').val(); 
-            const nr = $('#huisnummer').val();
+            const pc = $('#postcode').val(); const nr = $('#huisnummer').val();
             if(!pc || !nr) { alert('Vul postcode en huisnummer in.'); return; }
-            
-            // Record initial data
-            funnelAnswers.postcode = pc;
-            funnelAnswers.huisnummer = nr;
-            
             const gemeente = getGemeente(pc);
-            funnelAnswers.gemeente = gemeente;
-            
             $('#detected-municipality').text(gemeente);
+            
+            // Pre-fill fields for later
             $('#form-postcode').val(pc); 
             $('#form-housenumber').val(nr); 
             $('#form-city').val(gemeente === "uw regio" ? "" : gemeente);
@@ -594,69 +584,59 @@
                 $(this).addClass('d-none');
                 const target = (qNum === 'final') ? $('#question-final') : $('#question-' + qNum);
                 target.removeClass('d-none').fadeIn();
-                if(qNum !== 'final') { 
-                    target.find('.progress-bar').css('width', progressWidth + '%'); 
-                    target.find('.progress-text').text(progressWidth + '%'); 
-                }
+                if(qNum !== 'final') { target.find('.progress-bar').css('width', progressWidth + '%'); target.find('.progress-text').text(progressWidth + '%'); }
             });
         }
-
+        
         function validateStep3() { 
-            const consumption = $('#consumption-select').val();
-            if(!consumption) { alert('Kies uw verbruik.'); return; }
-            recordAnswer(3, consumption);
+            const val = $('#consumption-select').val();
+            if(!val) { alert('Kies uw verbruik.'); return; } 
+            setAnswer('consumption', val);
             goToQuestion(4, 64); 
         }
+        
+        function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
 
-        function scrollToTop() { 
-            window.scrollTo({top: 0, behavior: 'smooth'}); 
-        }
-
-        // ===== FORM SUBMISSION WITH DATABOWL INTEGRATION =====
         $('#finalLeadForm').on('submit', function(e) {
             e.preventDefault();
             
-            // Show loading state
-            $(this).html('<div class="text-center py-5"><div class="spinner-border text-primary mb-3"></div><h4 class="font-weight-bold">Uw gegevens versturen naar DataBowl...</h4></div>');
+            const formData = {
+                title: $('#form-title').val(),
+                firstname: $('#form-firstname').val(),
+                lastname: $('#form-lastname').val(),
+                street: $('#form-street').val(),
+                housenumber: $('#form-housenumber').val(),
+                postcode: $('#form-postcode').val(),
+                city: $('#form-city').val(),
+                phone: $('#form-phone').val(),
+                email: $('#form-email').val(),
+                funnel_answers: funnelAnswers
+            };
             
-            const formData = getFormData();
+            $(this).html('<div class="text-center py-5"><div class="spinner-border text-primary mb-3"></div><h4>Gegevens verzenden...</h4></div>');
             
-            // Send to your backend to submit to DataBowl
+            // Call the API
             $.ajax({
-                url: '/api/submit-lead.php',
+                url: '/api/submit-lead',
                 type: 'POST',
                 contentType: 'application/json',
-                data: JSON.stringify({
-                    leadData: formData,
-                    campaign_id: DATABOWL_CONFIG.campaignId,
-                    supplier_id: DATABOWL_CONFIG.supplierId,
-                    instance_name: DATABOWL_CONFIG.instanceName
-                }),
+                data: JSON.stringify({ leadData: formData }),
                 success: function(response) {
-                    console.log('Lead submitted successfully:', response);
-                    $(this).html('<div class="alert alert-success py-4"><h4>Klaar!</h4><p>Uw persoonlijke rendementsrapport voor 2026 is onderweg naar uw e-mail. Onze adviseur neemt binnen 24 uur contact op.</p></div>');
+                    console.log('Success:', response);
+                    $('#finalLeadForm').html('<div class="alert alert-success"><h4>Klaar!</h4><p>Uw aanvraag is succesvol ontvangen. U ontvangt uw rapport spoedig per e-mail.</p></div>');
                 },
-                error: function(xhr, status, error) {
-                    console.log('Error submitting lead:', error);
-                    // Still show success message even if API fails (fallback)
-                    $(this).html('<div class="alert alert-success py-4"><h4>Dank u wel!</h4><p>Uw aanvraag is ontvangen. We nemen zo spoedig mogelijk contact met u op.</p></div>');
+                error: function(error) {
+                    console.error('Error:', error);
+                    $('#finalLeadForm').html('<div class="alert alert-danger"><h4>Fout</h4><p>Er is iets fout gegaan bij het verzenden van uw gegevens. Probeer het later opnieuw.</p></div>');
                 }
             });
         });
+        
+        let cV = 0; const tL = 14382;
+        const iV = setInterval(() => { cV += 400; if(cV >= tL) { cV = tL; clearInterval(iV); } $('#counter').text(cV.toLocaleString()); }, 40);
 
-        // ===== COUNTER ANIMATION =====
-        let cV = 0; 
-        const tL = 14382;
-        const iV = setInterval(() => { 
-            cV += 400; 
-            if(cV >= tL) { cV = tL; clearInterval(iV); } 
-            $('#counter').text(cV.toLocaleString()); 
-        }, 40);
-
-        // ===== SOCIAL PROOF POPUP =====
         const spNames = ['Jan', 'Sophie', 'Henk', 'Emma', 'Mark'];
         const spMuns = ['Medemblik', 'Westland', 'Meierijstad', 'Ede'];
-        
         function showSP() {
             const n = spNames[Math.floor(Math.random()*spNames.length)];
             const m = spMuns[Math.floor(Math.random()*spMuns.length)];
@@ -664,9 +644,7 @@
             $('#social-proof-popup').css('display', 'flex').hide().fadeIn(500);
             setTimeout(() => { $('#social-proof-popup').fadeOut(500); }, 5000);
         }
-        
         setTimeout(() => { showSP(); setInterval(showSP, 18000); }, 8000);
     </script>
-
 </body>
 </html>
