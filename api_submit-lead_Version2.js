@@ -36,7 +36,7 @@ function submitLeadToDataBowl(leadData, campaignId, supplierId) {
         console.log('Submitting lead:', payload);
         
         // Replace with your actual DataBowl submission endpoint
-        const submissionUrl = 'https://your-databowl-instance.databowl.com/api/leads/submit';
+        const submissionUrl = `https://api.databowl.com/v1/leads/${campaignId}/${supplierId}/submit`;
         
         const options = {
             hostname: new URL(submissionUrl).hostname,
