@@ -1,12 +1,567 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Collectief Vrije Energie | Maak van je huis een Geldmachine</title>
+    
+    <!-- Bootstrap 4 CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --fvd-red: #8b0000;
+            --fvd-blue: #1a2a44;
+            --fvd-gold: #d4af37;
+            --fvd-light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--fvd-light);
+            color: #1a2a44;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Responsive Typography */
+        h1 { font-size: 2rem; line-height: 1.1; }
+        @media (min-width: 360px) { h1 { font-size: 2.25rem; } }
+        @media (min-width: 768px) { h1 { font-size: 3.5rem; } }
+
+        .bg-fvd-blue { background-color: var(--fvd-blue); }
+        .bg-fvd-red { background-color: var(--fvd-red); }
+        .text-fvd-gold { color: var(--fvd-gold); }
+        
+        .fvd-gradient {
+            background: linear-gradient(135deg, #1a2a44 0%, #0d1522 100%);
+        }
+
+        /* Funnel Buttons */
+        .btn-xl {
+            padding: 1rem 1.25rem;
+            font-size: 1.1rem;
+            font-weight: 800;
+            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-xl:active { transform: scale(0.97); }
+        .btn-gold { background-color: var(--fvd-gold); color: #000; border: none; }
+        
+        .btn-outline-custom {
+            border: 2px solid #e9ecef;
+            background: white;
+            color: var(--fvd-blue);
+            text-align: left;
+            padding: 1.25rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .btn-outline-custom:hover {
+            border-color: var(--fvd-gold);
+            background: #fffdf5;
+        }
+
+        .btn-fvd-red { background-color: var(--fvd-red); color: #fff !important; border: none; }
+
+        /* Funnel Layout */
+        .funnel-container {
+            max-width: 650px;
+            margin: 20px auto;
+            display: none; 
+        }
+        .funnel-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+            border-top: 5px solid var(--fvd-gold);
+        }
+
+        /* Layout Utilities */
+        .hero-section { padding-top: 2rem; padding-bottom: 3rem; }
+        @media (min-width: 768px) { .hero-section { padding-top: 4rem; padding-bottom: 5rem; } }
+        
+        .accent-border { border-left: 4px solid var(--fvd-red); padding-left: 1rem; }
+        .card-cve { border: none; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+        
+        .telegraaf-card { border-top: 4px solid var(--fvd-red); background: #fff; }
+
+        /* Step Card Styling */
+        .step-card {
+            border: none; background: white; border-radius: 16px;
+            transition: all 0.3s ease; position: relative;
+            padding: 2.5rem 1.5rem; height: 100%; border-bottom: 4px solid transparent;
+        }
+        .step-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(26, 42, 68, 0.1); border-bottom-color: var(--fvd-gold); }
+        .step-number-bg {
+            position: absolute; top: 15px; right: 20px;
+            font-size: 5rem; font-weight: 900; color: var(--fvd-gold);
+            opacity: 0.2; line-height: 1; font-family: 'Playfair Display', serif; pointer-events: none;
+        }
+        .step-icon-container {
+            width: 60px; height: 60px; background: var(--fvd-blue);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.5rem; box-shadow: 0 8px 15px rgba(26, 42, 68, 0.2);
+        }
+        .step-icon-container svg { width: 32px; height: 32px; fill: var(--fvd-gold); }
+
+        /* Form Styling Final Step */
+        .form-label-custom {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--fvd-blue);
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .form-control-custom {
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+            padding: 0.75rem 1rem;
+            font-weight: 500;
+        }
+        .form-control-custom:focus {
+            border-color: var(--fvd-gold);
+            box-shadow: none;
+            background-color: #fffdf5;
+        }
+
+        /* Social Proof Pop-up */
+        #social-proof-popup {
+            position: fixed; bottom: 20px; left: 20px; z-index: 1040;
+            background: white; padding: 12px 18px; border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); display: none;
+            align-items: center; border-left: 4px solid var(--fvd-gold); max-width: 300px;
+        }
+        @media (max-width: 767px) { #social-proof-popup { bottom: 90px; left: 10px; right: 10px; max-width: none; } }
+
+        .nowrap { white-space: nowrap; }
+        .check-list { list-style: none; padding-left: 0; }
+        .check-list li::before { content: "✓"; color: #2d6a4f; font-weight: bold; display: inline-block; width: 1.5em; }
+        
+        .progress-text { font-weight: 800; color: var(--fvd-gold); font-size: 0.85rem; }
+
+        .image-placeholder {
+            height: 120px;
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #adb5bd;
+            border-radius: 12px;
+        }
+    </style>
 </head>
-<body>
-    <h1>Welcome to my website!</h1>
-    <p>This is an HTML file created in the Dotcomglitch/Thuisbatterij-Verdienen repository.</p>
+<body class="pb-5">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-light bg-white py-2 py-md-3 shadow-sm sticky-top">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand d-flex align-items-center" href="#" onclick="location.reload()">
+                <span class="bg-fvd-red text-white px-2 py-1 font-weight-bold rounded mr-2" style="font-size: 0.9rem;">CVE</span>
+                <div class="d-flex flex-column" style="line-height: 1.1;">
+                    <span class="font-weight-bold small text-uppercase" style="font-size: 0.7rem; letter-spacing: 1px;">Collectief</span>
+                    <span class="font-weight-bold small text-uppercase" style="font-size: 0.7rem; letter-spacing: 1px;">Vrije Energie</span>
+                </div>
+            </a>
+            <span class="badge badge-danger p-2 text-uppercase d-none d-md-inline-block pulse">Beschikbaarheid beperkt per regio</span>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <!-- Hero & Postcode Check -->
+        <section id="hero-section" class="fvd-gradient text-white hero-section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 text-center text-lg-left mb-4 mb-lg-0">
+                        <h1 class="font-weight-bold mb-3 text-uppercase">
+                            <span class="nowrap">Maak van je huis</span><br>
+                            <span class="text-fvd-gold nowrap">Een geldmachine</span>
+                        </h1>
+                        <p class="lead opacity-90 mb-4 px-2 px-lg-0">Beveilig uw stroomvoorziening met een thuisbatterij en verdien aan de onbalansmarkt terwijl u slaapt.</p>
+                        <div class="d-none d-lg-block">
+                            <div class="bg-white rounded-lg p-3 d-inline-flex align-items-center text-dark shadow-sm">
+                                 <span class="h5 mb-0 mr-3 text-success">● LIVE</span>
+                                 <span class="font-weight-bold small">Regio-check direct beschikbaar</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5 offset-lg-1">
+                        <div class="card card-cve p-3 p-md-4 text-dark shadow-lg border-0">
+                            <h2 class="h5 mb-3 font-weight-bold text-center">Controleer uw adres</h2>
+                            <div class="form-row">
+                                <div class="col-8">
+                                    <input type="text" id="postcode" class="form-control form-control-lg mb-2" placeholder="Postcode">
+                                </div>
+                                <div class="col-4">
+                                    <input type="text" id="huisnummer" class="form-control form-control-lg mb-2" placeholder="Nr.">
+                                </div>
+                            </div>
+                            <button onclick="startFunnel()" class="btn btn-gold btn-block btn-xl mt-3 shadow-sm">Start de Winstcheck</button>
+                            <p class="text-center text-muted mt-3 mb-0" style="font-size: 0.7rem;">Nu mogelijk zonder directe eigen investering.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Telegraaf -->
+        <section class="py-4 bg-white border-bottom">
+            <div class="container">
+                <div class="telegraaf-card p-3 p-md-4 rounded shadow-sm border">
+                    <div class="row align-items-center">
+                        <div class="col-md-9 text-center text-md-left">
+                            <h3 class="h5 font-weight-bold serif mb-1">"Met een batterij liep de besparing op tot <span class="text-danger">900 euro</span>."</h3>
+                            <p class="small text-muted mb-0 font-weight-bold">— DE TELEGRAAF</p>
+                        </div>
+                        <div class="col-md-3 d-none d-md-block border-left text-center">
+                             <span class="d-block h4 font-weight-bold mb-0 text-fvd-blue" id="counter">0</span>
+                             <span class="small text-uppercase font-weight-bold text-muted" style="font-size: 0.6rem;">Checkers in uw regio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Self-Reliance / Zelfredzaamheid Section -->
+        <section class="py-5 bg-white">
+            <div class="container">
+                <div class="accent-border mb-4">
+                    <h2 class="h3 font-weight-bold mb-1">Zelfredzaamheid: Zekerheid in uw eigen huis</h2>
+                    <p class="text-muted font-weight-bold mb-0 text-uppercase small tracking-wider">Stop de afhankelijkheid van het overbelaste net</p>
+                </div>
+                <div class="row">
+                    <div class="col-lg-7">
+                        <p class="mb-4">Knipperende lampen, volle stopcontacten en een enorme piek in verbruik zodra iedereen thuiskomt. Het stroomnet komt steeds vaker onder extra druk te staan.</p>
+                        
+                        <p class="mb-4">De vraag is simpel: wat doet u als het net het niet meer aankan? Stel het u voor. Het is spitsuur. Heel Nederland verbruikt tegelijk stroom. En dan… valt alles uit. Geen wifi. Geen licht. Geen controle. U zit in het donker terwijl u nergens invloed op heeft. <strong>Juist op die momenten wilt u geen gedoe; u wilt zekerheid.</strong></p>
+
+                        <p class="mb-4 font-weight-bold">U kunt blijven hopen dat het goed gaat. Of u kunt het zelf regelen.</p>
+
+                        <p class="mb-4">Met een thuisbatterij kiest u voor zekerheid in plaats van afhankelijkheid. Tijdens piekbelasting of een storing blijven uw belangrijkste voorzieningen gewoon werken:</p>
+                        
+                        <ul class="check-list mb-4 font-weight-bold">
+                            <li>Licht blijft aan</li>
+                            <li>Wifi blijft actief</li>
+                            <li>Essentiële apparaten blijven draaien</li>
+                        </ul>
+
+                        <p class="mb-4">Waarom zou u volledig afhankelijk blijven van een overbelast net, als u zelf de regie kunt nemen?</p>
+                        
+                        <p class="mb-4 font-italic">Daarom kiezen steeds meer huishoudens voor eigen opslag in huis met een thuisbatterij. In combinatie met een noodstroomvoorziening kan uw woning bij een storing essentiële apparaten tijdelijk blijven ondersteunen.</p>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="card card-cve bg-light p-4 border-fvd-blue shadow-sm">
+                            <h4 class="h5 font-weight-bold mb-3">Tijdelijke kans: Thuisbatterij zonder investering</h4>
+                            <p class="small mb-3">Goed nieuws: voor veel huiseigenaren is een thuisbatterij <strong>nu mogelijk zonder dat u direct zelf hoeft te investeren</strong>. U hoeft dus niet eerst te sparen of te twijfelen.</p>
+                            <p class="small mb-4">Op basis van uw adres en situatie ziet u direct of u in aanmerking komt. De mogelijkheden zijn landelijk, maar de beschikbaarheid verschilt per regio.</p>
+                            <button onclick="scrollToTop()" class="btn btn-fvd-red btn-block font-weight-bold py-3 shadow">Controleer beschikbaarheid</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trinity / Verdienmodel -->
+        <section class="bg-fvd-blue text-white py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="h3 font-weight-bold">De Heilige Drie-eenheid van Rendement</h2>
+                    <p class="text-fvd-gold small text-uppercase font-weight-bold tracking-widest">Maak winst op de onbalansmarkt</p>
+                </div>
+                <div class="row text-center">
+                    <div class="col-6 col-md-4 mb-4">
+                        <div class="h3 mb-2">🔋</div>
+                        <h4 class="h6 font-weight-bold text-fvd-gold uppercase">Thuisbatterij</h4>
+                        <p class="x-small opacity-70">De geldmachine: koop goedkoop in, verkoop op de piek.</p>
+                    </div>
+                    <div class="col-6 col-md-4 mb-4">
+                        <div class="h3 mb-2">☀️</div>
+                        <h4 class="h6 font-weight-bold text-fvd-gold uppercase">Zonnepanelen</h4>
+                        <p class="x-small opacity-70">Uw eigen gratis energiecentrale op het dak.</p>
+                    </div>
+                    <div class="col-12 col-md-4 mb-4">
+                        <div class="h3 mb-2">🌡️</div>
+                        <h4 class="h6 font-weight-bold text-fvd-gold uppercase">Warmtepomp</h4>
+                        <p class="x-small opacity-70">Verwarm uw woning met uw eigen opgeslagen winst.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Premium Hoe werkt het Section -->
+        <section class="py-5 bg-light border-top border-bottom">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="h2 font-weight-bold">Hoe werkt het?</h2>
+                    <p class="text-muted small">In drie stappen naar volledige energie-autonomie en maximaal rendement.</p>
+                </div>
+                
+                <div class="row">
+                    <!-- Stap 1 -->
+                    <div class="col-md-4 mb-4 mb-md-0">
+                        <div class="card step-card shadow-sm">
+                            <div class="step-number-bg">1</div>
+                            <div class="step-icon-container">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            </div>
+                            <h4 class="h5 font-weight-bold mb-3 text-fvd-blue">De Winstcheck</h4>
+                            <p class="small text-muted mb-0">Laat onze experts direct beoordelen of uw woning en regio geschikt zijn voor onbalans-handel en BTW-voordelen.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Stap 2 -->
+                    <div class="col-md-4 mb-4 mb-md-0">
+                        <div class="card step-card shadow-sm">
+                            <div class="step-number-bg">2</div>
+                            <div class="step-icon-container">
+                                <svg viewBox="0 0 24 24"><path d="M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z"/></svg>
+                            </div>
+                            <h4 class="h5 font-weight-bold mb-3 text-fvd-blue">Het Rendementsplan</h4>
+                            <p class="small text-muted mb-0">U ontvangt een persoonlijk rapport met een gedetailleerde winstprognose voor de komende 10 jaar voor uw situatie.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Stap 3 -->
+                    <div class="col-md-4">
+                        <div class="card step-card shadow-sm">
+                            <div class="step-number-bg">3</div>
+                            <div class="step-icon-container">
+                                <svg viewBox="0 0 24 24"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg>
+                            </div>
+                            <h4 class="h5 font-weight-bold mb-3 text-fvd-blue">Direct Verdienen</h4>
+                            <p class="small text-muted mb-0">Na goedkeuring regelen wij alles. U start direct met verdienen aan dynamische prijzen. Winst vanaf dag één.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-5 text-center">
+                    <button onclick="scrollToTop()" class="btn btn-fvd-red btn-xl shadow px-5">Start uw winstcheck</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FUNNEL INTERFACE -->
+    <div id="funnel-view" class="funnel-container">
+        <div class="funnel-card">
+            <div id="funnel-loading" class="text-center py-5">
+                <div class="spinner-border text-primary mb-3" style="width: 3rem; height: 3rem;"></div>
+                <h4 class="font-weight-bold">Beschikbaarheid controleren...</h4>
+                <p id="loading-subtext" class="text-muted small">Locatie wordt geanalyseerd</p>
+            </div>
+
+            <div id="funnel-success" class="text-center py-5 d-none">
+                <div class="display-4 text-success mb-3">✓</div>
+                <h3 class="font-weight-bold mb-3 text-fvd-blue">Plekken beschikbaar!</h3>
+                <p class="mb-0">Goed nieuws. In gemeente <strong><span id="detected-municipality">uw gemeente</span></strong> zijn er installatie-mogelijkheden <strong>zonder investering</strong>.</p>
+                <p class="text-muted small mt-2">Een moment geduld, de check wordt voorbereid...</p>
+            </div>
+
+            <!-- Vraag 1 -->
+            <div id="question-1" class="question-step d-none">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="font-weight-bold text-muted small">Stap 1/5</span>
+                    <span class="progress-text">16%</span>
+                </div>
+                <div class="progress mb-4" style="height: 8px;"><div class="progress-bar bg-fvd-gold" style="width: 16%;"></div></div>
+                <div class="text-center mb-4">
+                    <div class="image-placeholder rounded mb-3">[Afbeelding: Zonnepanelen]</div>
+                    <h3 class="h4 font-weight-bold">Heeft u al zonnepanelen?</h3>
+                </div>
+                <button class="btn btn-outline-custom" onclick="goToQuestion(2, 32)">Ja, digitale meter <span>➔</span></button>
+                <button class="btn btn-outline-custom" onclick="goToQuestion(2, 32)">Ja, terugdraaiende teller <span>➔</span></button>
+                <button class="btn btn-outline-custom" onclick="goToQuestion(2, 32)">Nee, nog niet <span>➔</span></button>
+            </div>
+
+            <!-- Vraag 2 -->
+            <div id="question-2" class="question-step d-none">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="font-weight-bold text-muted small">Stap 2/5</span>
+                    <span class="progress-text">32%</span>
+                </div>
+                <div class="progress mb-4" style="height: 8px;"><div class="progress-bar bg-fvd-gold" style="width: 32%;"></div></div>
+                <div class="text-center mb-4">
+                    <div class="image-placeholder rounded mb-3">[Afbeelding: Type pand]</div>
+                    <h3 class="h4 font-weight-bold">Waar wilt u de batterij plaatsen?</h3>
+                </div>
+                <div class="row">
+                    <div class="col-6"><button class="btn btn-outline-custom flex-column py-4" onclick="goToQuestion(3, 48)">🏠 Woning</button></div>
+                    <div class="col-6"><button class="btn btn-outline-custom flex-column py-4" onclick="goToQuestion(3, 48)">🏢 Bedrijf</button></div>
+                </div>
+            </div>
+
+            <!-- Vraag 3 -->
+            <div id="question-3" class="question-step d-none">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="font-weight-bold text-muted small">Stap 3/5</span>
+                    <span class="progress-text">48%</span>
+                </div>
+                <div class="progress mb-4" style="height: 8px;"><div class="progress-bar bg-fvd-gold" style="width: 48%;"></div></div>
+                <div class="text-center mb-4"><h3 class="h4 font-weight-bold">Jaarlijks verbruik?</h3></div>
+                <select id="consumption-select" class="custom-select custom-select-lg mb-4" style="font-size: 0.9rem;">
+                    <option value="" disabled selected>Maak een keuze...</option>
+                    <option value="2300">2300 kWh (1 pers.)</option>
+                    <option value="3400">3400 kWh (2 pers.)</option>
+                    <option value="4100">4100 kWh (3 pers.)</option>
+                    <option value="4600">4600 kWh (4 pers.)</option>
+                    <option value="5300">5300 kWh (5 pers.)</option>
+                    <option value="plus">> 5300 kWh</option>
+                </select>
+                <button class="btn btn-gold btn-block btn-xl shadow" onclick="validateStep3()">Volgende stap ➔</button>
+            </div>
+
+            <!-- Vraag 4 -->
+            <div id="question-4" class="question-step d-none">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="font-weight-bold text-muted small">Stap 4/5</span>
+                    <span class="progress-text">64%</span>
+                </div>
+                <div class="progress mb-4" style="height: 8px;"><div class="progress-bar bg-fvd-gold" style="width: 64%;"></div></div>
+                <div class="text-center mb-4"><h3 class="h4 font-weight-bold">Is er ruimte voor een batterij?</h3></div>
+                <button class="btn btn-outline-custom" onclick="goToQuestion(5, 80)">Ja, voldoende ruimte <span>➔</span></button>
+                <button class="btn btn-outline-custom" onclick="goToQuestion(5, 80)">Nee, ik twijfel <span>➔</span></button>
+            </div>
+
+            <!-- Vraag 5 -->
+            <div id="question-5" class="question-step d-none">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="font-weight-bold text-muted small">Stap 5/5</span>
+                    <span class="progress-text">80%</span>
+                </div>
+                <div class="progress mb-4" style="height: 8px;"><div class="progress-bar bg-fvd-gold" style="width: 80%;"></div></div>
+                <div class="text-center mb-4">
+                    <h3 class="h4 font-weight-bold">Stroomuitval bij kou? Blijft jouw huis aan?</h3>
+                    <div class="bg-light p-3 rounded mb-3 text-left small border-left border-fvd-gold">
+                        <p class="mb-0 text-muted">Jouw woning komt in aanmerking. Dit geeft zekerheid op koude dagen en houdt licht en wifi aan.</p>
+                    </div>
+                    <p class="font-weight-bold mb-3">Wat voor type woning heeft u?</p>
+                </div>
+                <div class="row">
+                    <div class="col-6"><button class="btn btn-outline-custom flex-column py-3 text-center" onclick="goToQuestion('final', 100)">Huurwoning</button></div>
+                    <div class="col-6"><button class="btn btn-outline-custom flex-column py-3 text-center" onclick="goToQuestion('final', 100)">Koopwoning</button></div>
+                </div>
+            </div>
+
+            <!-- Finale Lead Form -->
+            <div id="question-final" class="question-step d-none">
+                <div class="text-center mb-4">
+                    <div class="h2 text-success mb-2">📄</div>
+                    <h3 class="h4 font-weight-bold mb-2">Uw Rendementsplan staat klaar.</h3>
+                    <p class="small text-muted">Zet de laatste stap naar financiële onafhankelijkheid. Na verzending ontvangt u direct uw persoonlijke winstprognose.</p>
+                </div>
+                
+                <form id="finalLeadForm" class="row no-gutters">
+                    <div class="col-12 mb-3"><label class="form-label-custom">Aanhef *</label>
+                        <select class="form-control form-control-custom" required><option value="" disabled selected>Kies...</option><option>Dhr.</option><option>Mevr.</option></select>
+                    </div>
+                    <div class="col-md-6 pr-md-2 mb-3"><label class="form-label-custom">Voornaam *</label><input type="text" class="form-control form-control-custom" required></div>
+                    <div class="col-md-6 mb-3"><label class="form-label-custom">Achternaam *</label><input type="text" class="form-control form-control-custom" required></div>
+                    <div class="col-md-8 pr-md-2 mb-3"><label class="form-label-custom">Straatnaam *</label><input type="text" class="form-control form-control-custom" required></div>
+                    <div class="col-md-2 pr-md-2 mb-3"><label class="form-label-custom">Nr *</label><input type="text" id="final-huisnummer" class="form-control form-control-custom" required></div>
+                    <div class="col-md-2 mb-3"><label class="form-label-custom">Toev.</label><input type="text" class="form-control form-control-custom"></div>
+                    <div class="col-md-5 pr-md-2 mb-3"><label class="form-label-custom">Postcode *</label><input type="text" id="final-postcode" class="form-control form-control-custom" required></div>
+                    <div class="col-md-7 mb-3"><label class="form-label-custom">Woonplaats *</label><input type="text" id="final-woonplaats" class="form-control form-control-custom" required></div>
+                    <div class="col-12 mb-3"><label class="form-label-custom">Telefoonnummer *</label>
+                        <div class="input-group"><div class="input-group-prepend"><span class="input-group-text small">+31</span></div><input type="tel" class="form-control form-control-custom" required></div>
+                    </div>
+                    <div class="col-12 mb-4"><label class="form-label-custom">E-mail *</label><input type="email" class="form-control form-control-custom" required></div>
+                    <div class="col-12"><button type="submit" class="btn btn-fvd-red btn-block btn-xl shadow-lg">Pak mijn winst ➔</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white-50 py-4 text-center mt-5">
+        <div class="container">
+            <p class="small font-weight-bold text-uppercase mb-2">Collectief Vrije Energie</p>
+            <p style="font-size: 0.65rem;">© 2026 CVE. Wij helpen burgers aan energie-rendement en zelfredzaamheid.</p>
+        </div>
+    </footer>
+
+    <div id="social-proof-popup">
+        <div class="d-flex align-items-center">
+            <div class="bg-light rounded-circle p-2 mr-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: var(--fvd-blue);"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            </div>
+            <div style="line-height: 1.3;">
+                <p class="mb-0 small font-weight-bold" id="sp-name">Jan uit Amsterdam</p>
+                <p class="mb-0 x-small text-muted">Aanvraag ingediend</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        const gemeenteLookup = { '10': 'Amsterdam', '30': 'Rotterdam', '35': 'Utrecht', '56': 'Eindhoven', '97': 'Groningen', '20': 'Haarlem' };
+        function getGemeente(postcode) { const prefix = postcode.substring(0, 2); return gemeenteLookup[prefix] || "uw regio"; }
+
+        function startFunnel() {
+            const pc = $('#postcode').val(); const nr = $('#huisnummer').val();
+            if(!pc || !nr) { alert('Vul postcode en huisnummer in.'); return; }
+            const gemeente = getGemeente(pc);
+            $('#detected-municipality').text(gemeente);
+            $('#final-postcode').val(pc); $('#final-huisnummer').val(nr); $('#final-woonplaats').val(gemeente === "uw regio" ? "" : gemeente);
+
+            $('#main-content').fadeOut(300, function() {
+                $('#funnel-view').fadeIn();
+                window.scrollTo({top: 0, behavior: 'smooth'});
+                setTimeout(() => {
+                    $('#funnel-loading').fadeOut(300, function() {
+                        $('#funnel-success').removeClass('d-none').fadeIn();
+                        setTimeout(() => { $('#funnel-success').fadeOut(300, function() { $('#question-1').removeClass('d-none').fadeIn(); }); }, 2500);
+                    });
+                }, 1500);
+            });
+        }
+
+        function goToQuestion(qNum, progressWidth) {
+            $('.question-step').fadeOut(200, function() {
+                $(this).addClass('d-none');
+                const target = (qNum === 'final') ? $('#question-final') : $('#question-' + qNum);
+                target.removeClass('d-none').fadeIn();
+                if(qNum !== 'final') { target.find('.progress-bar').css('width', progressWidth + '%'); target.find('.progress-text').text(progressWidth + '%'); }
+            });
+        }
+        function validateStep3() { if(!$('#consumption-select').val()) { alert('Kies uw verbruik.'); return; } goToQuestion(4, 64); }
+        function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
+
+        $('#finalLeadForm').on('submit', function(e) {
+            e.preventDefault();
+            $(this).html('<div class="text-center py-5"><div class="spinner-border text-primary mb-3"></div><h4 class="font-weight-bold">Rendementsplan opstellen...</h4></div>');
+            setTimeout(() => { $(this).html('<div class="alert alert-success py-4"><h4>Klaar!</h4><p>Uw persoonlijke rendementsrapport voor 2026 is onderweg naar uw e-mail. Onze adviseur neemt binnen 24 uur contact op.</p></div>'); }, 2500);
+        });
+        
+        let cV = 0; const tL = 14382;
+        const iV = setInterval(() => { cV += 400; if(cV >= tL) { cV = tL; clearInterval(iV); } $('#counter').text(cV.toLocaleString()); }, 40);
+
+        const spNames = ['Jan', 'Sophie', 'Henk', 'Emma', 'Mark'];
+        const spMuns = ['Medemblik', 'Westland', 'Meierijstad', 'Ede'];
+        function showSP() {
+            const n = spNames[Math.floor(Math.random()*spNames.length)];
+            const m = spMuns[Math.floor(Math.random()*spMuns.length)];
+            $('#sp-name').text(`${n} uit gemeente ${m}`);
+            $('#social-proof-popup').css('display', 'flex').hide().fadeIn(500);
+            setTimeout(() => { $('#social-proof-popup').fadeOut(500); }, 5000);
+        }
+        setTimeout(() => { showSP(); setInterval(showSP, 18000); }, 8000);
+    </script>
 </body>
 </html>
